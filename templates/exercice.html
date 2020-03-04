@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8"/>
+    <link href="../static/style.css" rel="stylesheet"/>
+    <link href="../static/abcjs-audio.css" rel="stylesheet"/>
+    <title>{{exercice.name}}</title>
+    <script src="../static/abcjs_basic_5.9.1-min.js"></script>
+  </head>
+  <body>
+    <header class="centerflex">
+      <h1>{{exercice.name}}</h1>
+      <a style="padding-left:17px; padding-top:44px" href="../editer_exercice/{{exercice.id}}">
+        <img alt="" src="../static/pencil-edit-button.svg"/>
+      </a>
+    </header>
+
+    <h2 style="padding-left:31.5%;padding-bottom: 6%;display:inline-block">{{exercice.category}}</h2>
+    <div class="centerflex" id="notation">
+    </div>
+    <div style="padding-bottom:50px;" id="audio" class="centerflex">
+    </div>
+    <h2 style="padding-left:31.5%;display:inline-block">Notes :</h2>
+    <div style="padding-bottom:10%" class="centerflex">
+      <p style="width:37%">{{exercice.notes}}</p>
+
+    </div>
+    <div class="centerflex">
+      <a class="footerel" href="../deconnection">Déconnection</a>
+      <div style="width:20%" class="footerspacer"></div>
+      <a class="footerel" href="tableau_de_bord">Tableau de bord</a>
+    </div>
+    <div style="display:none;" id="abccode">{{exercice.abc}}</div>
+    <script>
+      ex = {}
+
+      function changeTune(tune,tempo) {
+          visualObj = ABCJS.renderAbc('notation', tune)[0];
+          synthControl.setTune(visualObj, true, {options: {"qpm":tempo}});
+      }
+
+      window.onload = function(){
+          ex = document.querySelector("#abccode").textContent;
+          var myContext = new AudioContext();
+          visualObj = ABCJS.renderAbc('notation', ex)[0];
+          synthControl = new ABCJS.synth.SynthController();
+          synthControl.load("#audio", null, {displayRestart: true, displayPlay: true, displayProgress: true, displayWarp:true});
+          synthControl.setTune(visualObj, false);
+          ABCJS.renderAbc('notation', ex);
+      }
+      progressButton = null;
+      alreadyPlayedButton = document.createElement("div");
+      alreadyPlayedButton.style.display = "none";
+      alreadyPlayedButton.onclick = function(e) {
+          console.log(e);
+          var ev = new MouseEvent('click', {
+              'view': window,
+              'bubbles': true,
+              'cancelable': true,
+              'screenX': e.clientX,
+              'screenY': e.clientY
+          });
+
+          var el = progressButton;
+
+          el.dispatchEvent(ev);
+      }
+      document.body.appendChild(alreadyPlayedButton);
+      setInterval(function() {
+          // gets the button
+
+          if (progressButton === null) {
+              progressButton = document.querySelector(".abcjs-midi-progress-background");
+              return;
+          }
+          var r = progressButton.getBoundingClientRect();
+          alreadyPlayedButton.style = {};
+          alreadyPlayedButton.style.display = "block";
+          alreadyPlayedButton.style.backgroundColor = "rgb(0, 239, 232)"
+          alreadyPlayedButton.style.position = "absolute";
+          alreadyPlayedButton.style.zIndex = 9001;
+          alreadyPlayedButton.style.width = r.width*synthControl.percent + "px";
+          alreadyPlayedButton.style.height = r.height + "px";
+          alreadyPlayedButton.style.right = r.right + "px";
+          alreadyPlayedButton.style.left = r.left + "px";
+          alreadyPlayedButton.style.top = r.top + window.scrollY + "px";
+
+      }, 10)
+    </script>
+  </body>
+</html>

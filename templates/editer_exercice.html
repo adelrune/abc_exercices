@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8"/>
+    <link href="../static/style.css" rel="stylesheet"/>
+    <link href="../static/abcjs-audio.css" rel="stylesheet"/>
+    <title>Éditer un exercice</title>
+    <script src="../static/abcjs_basic_5.9.1-min.js"></script>
+  </head>
+  <body>
+    <header class="centerflex">
+      <h1>Éditer un exercice</h1>
+    </header>
+    <form style="padding-left:28.5%" action="">
+      <span>Nom: </span>
+      <input id="name" name="name" type="text" value={% if exercice.id != "" and exercice.id != None %} "{{exercice.name}}" {% else %} "entrez un nom" {%endif%}/>
+      <div></div>
+      <span>Catégorie: </span>
+      <input id="cat" name="category" type="text" value={% if exercice.id != "" and exercice.id != None %} "{{exercice.category}}" {% else %} "entrez un nom de catégorie" {%endif%}/>
+      <div></div>
+      <span>Code ABC: <a href="http://abcnotation.com/">(tel que défini ici)</a></span>
+      <textarea name="abc" id="abc" cols="80" rows="15">{% if exercice.id != "" and exercice.id != None %}{{exercice.abc}}{% else %}
+X:1
+M:4/4
+L:1/1
+K:C
+Q:100
+|C|{% endif %}
+      </textarea>
+
+    </form>
+    <div class="centerflex" id="abcviz"></div>
+    <div style="padding-bottom:50px;" id="audio" class="centerflex">
+    </div>
+    <h2 style="padding-left:28.5%;display:inline-block">Notes :</h2>
+
+    <div style="padding-left:28.5%" >
+      <textarea cols="30" id="notes">{% if exercice.id != "" and exercice.id != None %} {{exercice.notes}}{%endif%}</textarea>
+
+    </div>
+    <div class="centerflex">
+      <input id="confirm" name="submit" type="submit" value="Confirmer"/>
+    </div>
+    <div class="centerflex">
+      <a class="footerel" href="../deconnection">Déconnection</a>
+      <div style="width:20%" class="footerspacer"></div>
+      <a class="footerel" href="tableau_de_bord">Tableau de bord</a>
+    </div>
+    <div id="warnings"></div>
+    <script>
+      function initEditor() {
+	  a = new ABCJS.Editor("abc", { paper_id: "abcviz",
+			            synth: {
+				        el: "#audio",
+				        options: { displayLoop: true, displayRestart: true, displayPlay: true, displayProgress: true, displayWarp: true }
+			            },
+			            abcjsParams: {
+			            }
+		                      });
+          document.querySelector("#confirm").onclick = function() {
+              var notes = document.querySelector("#notes").value;
+              var cat = document.querySelector("#cat").value;
+              var name = document.querySelector("#name").value;
+              var abc = document.querySelector("#abc").value;
+
+              var xhr = new XMLHttpRequest();
+              var url = '/save_exercice/{% if exercice.id != "" and exercice.id != None %}{{exercice.id}}{%endif%}';
+              xhr.open('POST', window.location.origin + url);
+              xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+              xhr.onreadystatechange = function() {
+                  if (xhr.readyState === XMLHttpRequest.DONE) {
+                      window.location = window.location.origin + "/exercice/" + xhr.response;
+                  }
+              };
+
+              xhr.send(JSON.stringify(
+                  { "notes": notes, "category":cat, "name":name, "abc":abc})
+              );
+          }
+      }
+
+      window.addEventListener("load", initEditor, false);
+      progressButton = null;
+      alreadyPlayedButton = document.createElement("div");
+      alreadyPlayedButton.style.display = "none";
+      alreadyPlayedButton.onclick = function(e) {
+          console.log(e);
+          var ev = new MouseEvent('click', {
+              'view': window,
+              'bubbles': true,
+              'cancelable': true,
+              'screenX': e.clientX,
+              'screenY': e.clientY
+          });
+
+          var el = progressButton;
+
+          el.dispatchEvent(ev);
+      }
+      document.body.appendChild(alreadyPlayedButton);
+      function progressbar(){
+          // gets the button
+
+          if (progressButton === null) {
+              progressButton = document.querySelector(".abcjs-midi-progress-background");
+              return;
+          }
+          var r = progressButton.getBoundingClientRect();
+          // console.log(r);
+          alreadyPlayedButton.style = {};
+          alreadyPlayedButton.style.display = "block";
+          alreadyPlayedButton.style.backgroundColor = "rgb(0, 239, 232)"
+          alreadyPlayedButton.style.position = "absolute";
+          alreadyPlayedButton.style.zIndex = 9001;
+          alreadyPlayedButton.style.width = r.width*a.synth.synthControl.percent + "px";
+          alreadyPlayedButton.style.height = r.height + "px";
+          alreadyPlayedButton.style.right = r.right + "px";
+          alreadyPlayedButton.style.left = r.left + "px";
+          alreadyPlayedButton.style.top = r.top + window.scrollY + "px";
+
+      }
+      setInterval(progressbar, 10);
+    </script>
+  </body>
+</html>

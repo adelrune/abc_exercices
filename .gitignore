@@ -1,0 +1,6 @@
+*.zip
+maque*/*
+*.db
+#*#
+*.*~
+*__pycache__*

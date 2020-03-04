@@ -1,0 +1,130 @@
+body {
+    background: rgb(77,77,77);
+    color: rgb(0,239,232);
+    font-family: Arial;
+    font-weight: 1;
+}
+
+path:not(.abcjs-note_selected) {
+    fill: rgb(0,239,232);
+}
+
+path.abcjs-note_selected {
+    fill: rgb(232,239,0);
+}
+
+path[stroke="#000000"] {
+    stroke: rgb(0,239,232);
+}
+
+text {
+    color: rgb(0,239,232);
+    fill: rgb(0,239,232);
+    stroke: rgb(0,239,232);
+}
+
+.subcat {
+    padding-left: 28.5%;
+    font-size: 35px;
+}
+
+.exlist {
+    padding-left: 29.5%;
+    font-size:20px;
+    padding-bottom: 2em;
+}
+
+.spacer {
+    padding-top: 2px;
+    border-bottom: 2px solid;
+    border-bottom-color: rgb(0,239,232);
+    width:44%;
+}
+
+tspan {
+    color: rgb(0,239,232);
+    fill: rgb(0,239,232);
+    stroke: rgb(0,239,232);
+}
+
+editpen2 {
+    width: 30px;
+    padding: 1%;
+}
+
+.big_link {
+    font-size: 25px;
+    padding-bottom: 5%;
+    display: inline-block;
+}
+
+footer {
+    display: flex;
+    padding-left:20%;
+    padding-right: 20%;
+}
+
+footerel {
+    flex-grow: 1;
+}
+
+footerspacer{
+    flex-grow: 2;
+    width:33%
+}
+
+.centerflex {
+    display: flex;
+    justify-content: center;
+}
+
+
+input[type=text] {
+  border: 1px solid rgb(0,239,232);
+  border-radius: 2px;
+  font-size: 18px;
+  text-align: center;
+  width: 17em;
+  background: rgb(177,177,177);
+  margin-bottom: 2em;
+}
+
+
+input[type=text] {
+  border: 1px solid rgb(0,239,232);
+  border-radius: 2px;
+  font-size: 18px;
+  text-align: center;
+  width: 17em;
+  background: rgb(177,177,177);
+  margin-bottom: 2em;
+}
+
+
+textarea {
+  border: 1px solid rgb(0,239,232);
+  border-radius: 2px;
+  font-size: 18px;
+  width: 60%;
+  height: 12em;
+  background: rgb(177,177,177);
+  margin-bottom: 2em;
+  display: block;
+}
+
+input[type=submit] {
+  border: 1px solid rgb(0,239,232);
+  border-radius: 2px;
+  font-size: 15px;
+  text-align: center;
+  margin-bottom: 2em;
+}
+
+h1 {
+    text-align: center;
+    font-size: 55px;
+}
+
+a {
+    color: rgb(0,239,232);
+}

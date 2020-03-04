@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8"/>
+    <link href="../static/style.css" rel="stylesheet"/>
+    <title>Vos Exercices</title>
+  </head>
+  <body>
+    <header class="centerflex" style="margin-bottom:6%">
+      <h1>Vos Exercices</h1>
+    </header>
+    {% for cat in cats%}
+    <div class="subcat">
+      {{cat}}
+    </div>
+    <div class="centerflex">
+      <div class="spacer"></div>
+    </div>
+    <ul class="exlist">
+    {% for ex in cats[cat] %}
+      <li><a href="exercice/{{ex.id}}">{{ex.name}}</a></li>
+    {% endfor %}
+    </ul>
+    {% endfor %}
+    <div class="centerflex">
+      <a class="footerel" href="../deconnection">Déconnection</a>
+      <div style="width:20%" class="footerspacer"></div>
+      <a class="footerel" href="tableau_de_bord">Tableau de bord</a>
+    </div>
+    </div>
+  </body>
+</html>
