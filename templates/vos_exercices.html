@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8"/>
-    <link href="../static/style.css" rel="stylesheet"/>
+    <link href="{{url_for('static', filename='style.css')}}" rel="stylesheet"/>
     <title>Vos Exercices</title>
   </head>
   <body>
@@ -23,9 +23,9 @@
     </ul>
     {% endfor %}
     <div class="centerflex">
-      <a class="footerel" href="../deconnection">Déconnection</a>
+      <a class="footerel" href="{{url_for('logout')}}">Déconnection</a>
       <div style="width:20%" class="footerspacer"></div>
-      <a class="footerel" href="tableau_de_bord">Tableau de bord</a>
+      <a class="footerel" href="{{url_for('tdb')}}">Tableau de bord</a>
     </div>
     </div>
   </body>

@@ -2,10 +2,10 @@
 <html>
   <head>
     <meta charset="UTF-8"/>
-    <link href="../static/style.css" rel="stylesheet"/>
-    <link href="../static/abcjs-audio.css" rel="stylesheet"/>
+    <link href="{{url_for('static', filename='style.css')}}" rel="stylesheet"/>
+    <link href="{{url_for('static', filename='abcjs-audio.css')}}" rel="stylesheet"/>
     <title>Éditer un exercice</title>
-    <script src="../static/abcjs_basic_5.9.1-min.js"></script>
+    <script src="{{url_for('static', filename='abcjs_basic_5.9.1-min.js')}}"></script>
   </head>
   <body>
     <header class="centerflex">
@@ -42,9 +42,9 @@ Q:100
       <input id="confirm" name="submit" type="submit" value="Confirmer"/>
     </div>
     <div class="centerflex">
-      <a class="footerel" href="../deconnection">Déconnection</a>
+      <a class="footerel" href="{{url_for('logout')}}">Déconnection</a>
       <div style="width:20%" class="footerspacer"></div>
-      <a class="footerel" href="tableau_de_bord">Tableau de bord</a>
+      <a class="footerel" href="{{url_for('tdb')}}">Tableau de bord</a>
     </div>
     <div id="warnings"></div>
     <script>
@@ -70,7 +70,7 @@ Q:100
 
               xhr.onreadystatechange = function() {
                   if (xhr.readyState === XMLHttpRequest.DONE) {
-                      window.location = window.location.origin + "/exercice/" + xhr.response;
+                      window.location = "{{url_for('exercice')}}" + "/" + xhr.response;
                   }
               };
 
