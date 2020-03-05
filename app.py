@@ -101,9 +101,9 @@ def rand_ex():
         return redirect(url_for("routes.homepage"))
     exs = Exercise.query.filter_by(user_id=flask_login.current_user.id).all()
     if not exs:
-        return redirect("editer_exercice")
+        return redirect(url_for("routes.edit_ex"))
 
-    return redirect("/exercice/{}".format(choice(exs).id))
+    return redirect(url_for("routes.exercice")+"/{}".format(choice(exs).id))
 
 @routes.route("/save_exercice/", methods=["POST"])
 @routes.route("/save_exercice/<id>", methods=["POST"])
