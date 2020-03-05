@@ -10,16 +10,16 @@
       <h1>Bienvenue {{username}}</h1>
     </header>
     <div class="centerflex">
-      <a class="big_link" href="{{url_for('rand_ex')}}"><h2>Exercice au hasard</h2></a>
+      <a class="big_link" href="{{url_for('routes.rand_ex')}}"><h2>Exercice au hasard</h2></a>
     </div>
     <div class="centerflex">
-      <a class="big_link" href="{{url_for('edit_ex')}}"><h2>Nouvel exercice</h2></a>
+      <a class="big_link" href="{{url_for('routes.edit_ex')}}"><h2>Nouvel exercice</h2></a>
     </div>
     <div class="centerflex">
-      <a class="big_link" href="{{url_for('vos_ex')}}"><h2>Consulter vos exercices</h2></a>
+      <a class="big_link" href="{{url_for('routes.vos_ex')}}"><h2>Consulter vos exercices</h2></a>
     </div>
     <footer>
-      <a class="footer_el" href="{{url_for('logout')}}">Déconnection</a>
+      <a class="footer_el" href="{{url_for('routes.logout')}}">Déconnection</a>
     </footer>
     </div>
   </body>

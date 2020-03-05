@@ -42,9 +42,9 @@ Q:100
       <input id="confirm" name="submit" type="submit" value="Confirmer"/>
     </div>
     <div class="centerflex">
-      <a class="footerel" href="{{url_for('logout')}}">Déconnection</a>
+      <a class="footerel" href="{{url_for('routes.logout')}}">Déconnection</a>
       <div style="width:20%" class="footerspacer"></div>
-      <a class="footerel" href="{{url_for('tdb')}}">Tableau de bord</a>
+      <a class="footerel" href="{{url_for('routes.tdb')}}">Tableau de bord</a>
     </div>
     <div id="warnings"></div>
     <script>
@@ -70,7 +70,7 @@ Q:100
 
               xhr.onreadystatechange = function() {
                   if (xhr.readyState === XMLHttpRequest.DONE) {
-                      window.location = "{{url_for('exercice')}}" + "/" + xhr.response;
+                      window.location = "{{url_for('routes.exercice')}}" + "/" + xhr.response;
                   }
               };
 
