@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, redirect, url_for, Blueprint
+from flask import Flask, render_template, request, redirect, Blueprint
 from flask_sqlalchemy import SQLAlchemy
+import flask
 from random import choice
 import flask_login
 
@@ -11,6 +12,10 @@ login_manager = flask_login.LoginManager()
 login_manager.init_app(app)
 
 routes = Blueprint('routes', __name__, template_folder='templates')
+url_for_prefix = ""
+url_for = lambda *args, **kwargs: url_for_prefix + flask.url_for(*args, **kwargs)
+
+app.jinja_env.globals['url_for'] = url_for
 
 @login_manager.user_loader
 def load_user(user_id):
