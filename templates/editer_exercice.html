@@ -64,7 +64,7 @@ Q:100
               var abc = document.querySelector("#abc").value;
 
               var xhr = new XMLHttpRequest();
-              var url = "{{url_for('routes.save_exercice')}}/{% if exercice.id != '' and exercice.id != None %}{{exercice.id}}{%endif%}";
+              var url = "{{url_for('routes.save_ex')}}/{% if exercice.id != '' and exercice.id != None %}{{exercice.id}}{%endif%}";
               xhr.open('POST', window.location.origin + url);
               xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 
