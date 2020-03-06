@@ -3,11 +3,11 @@
   <head>
     <meta charset="UTF-8"/>
     <link href="{{url_for('static', filename='style.css')}}" rel="stylesheet"/>
-    <title>Vos Exercices</title>
+    <title>Vos exercices</title>
   </head>
   <body>
     <header class="centerflex" style="margin-bottom:6%">
-      <h1>Vos Exercices</h1>
+      <h1>Vos exercices</h1>
     </header>
     {% for cat in cats%}
     <div class="subcat">
@@ -23,7 +23,7 @@
     </ul>
     {% endfor %}
     <div class="centerflex">
-      <a class="footerel" href="{{url_for('routes.logout')}}">Déconnection</a>
+      <a class="footerel" href="{{url_for('routes.logout')}}">Déconnexion</a>
       <div style="width:20%" class="footerspacer"></div>
       <a class="footerel" href="{{url_for('routes.tdb')}}">Tableau de bord</a>
     </div>

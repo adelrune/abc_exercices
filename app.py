@@ -78,12 +78,13 @@ def edit_ex(id=None):
     if not(hasattr(flask_login.current_user, "username")):
         return redirect(url_for("routes.homepage"))
     ex = None
+    new_ex = id is None
     if id is None:
         ex = Exercise()
     else:
         ex = Exercise.query.filter_by(id=id).first()
 
-    return render_template("editer_exercice.html", exercice=ex)
+    return render_template("editer_exercice.html", exercice=ex, new_ex=new_ex)
 
 @routes.route("/exercice")
 @routes.route("/exercice/<id>")

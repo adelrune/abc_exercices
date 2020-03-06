@@ -4,12 +4,20 @@
     <meta charset="UTF-8"/>
     <link href="{{url_for('static', filename='style.css')}}" rel="stylesheet"/>
     <link href="{{url_for('static', filename='abcjs-audio.css')}}" rel="stylesheet"/>
-    <title>Éditer un exercice</title>
+    {% if not new_ex%}
+    <title>Modifier un exercice</title>
+    {% else %}
+    <title>Nouvel exercice</title>
+    {% endif %}
     <script src="{{url_for('static', filename='abcjs_basic_5.9.1-min.js')}}"></script>
   </head>
   <body>
     <header class="centerflex">
-      <h1>Éditer un exercice</h1>
+        {% if not new_ex%}
+        <h1>Modifier un exercice</h1>
+        {% else %}
+        <h1>Nouvel exercice</h1>
+        {% endif %}
     </header>
     <form style="padding-left:28.5%" action="">
       <span>Nom: </span>
@@ -42,7 +50,7 @@ Q:100
       <input id="confirm" name="submit" type="submit" value="Confirmer"/>
     </div>
     <div class="centerflex">
-      <a class="footerel" href="{{url_for('routes.logout')}}">Déconnection</a>
+      <a class="footerel" href="{{url_for('routes.logout')}}">Déconnexion</a>
       <div style="width:20%" class="footerspacer"></div>
       <a class="footerel" href="{{url_for('routes.tdb')}}">Tableau de bord</a>
     </div>
